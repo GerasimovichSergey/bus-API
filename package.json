@@ -1,0 +1,21 @@
+{
+  "name": "api-bus",
+  "version": "1.0.0",
+  "description": "bus schedule",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "buses",
+    "online"
+  ],
+  "author": "Gerasimovich Sergei",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.21.1",
+    "luxon": "^3.5.0"
+  }
+}
