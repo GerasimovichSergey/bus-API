@@ -61,16 +61,17 @@ const sendUpdatedData = async () => {
     return updateBuses;
 };
 
+const sortBusTime = ((bus1, bus2) => {
+    const bus1InMillis = DateTime.fromISO(`${bus1.nextDeparture.date}T${bus1.nextDeparture.time}`).toMillis();
+    const bus2InMillis = DateTime.fromISO(`${bus2.nextDeparture.date}T${bus2.nextDeparture.time}`).toMillis();
+
+    return bus1InMillis - bus2InMillis;
+});
+
 app.get('/next-departure', async (req, res) => {
     try {
         const updatedBuses = await sendUpdatedData();
-
-        const sortBuses = updatedBuses.sort((bus1, bus2) => {
-            const bus1InMillis = DateTime.fromISO(`${bus1.nextDeparture.date}T${bus1.nextDeparture.time}`).toMillis();
-            const bus2InMillis = DateTime.fromISO(`${bus2.nextDeparture.date}T${bus2.nextDeparture.time}`).toMillis();
-
-            return bus1InMillis - bus2InMillis;
-        });
+        const sortBuses = updatedBuses.sort(sortBusTime);
 
         res.send(sortBuses);
     } catch {
